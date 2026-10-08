@@ -1,0 +1,1779 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Comparativa de Software CAD y FEA | U3 TTP3</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #0b1120;
+            color: #e5e7eb;
+            line-height: 1.7;
+        }
+
+        /* =========================
+           BARRA DE NAVEGACIÓN
+        ========================= */
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(11, 17, 32, 0.94);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #243044;
+        }
+
+        nav {
+            max-width: 1250px;
+            margin: auto;
+            padding: 15px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #38bdf8;
+        }
+
+        .menu {
+            display: flex;
+            gap: 22px;
+            list-style: none;
+        }
+
+        .menu a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .menu a:hover {
+            color: #38bdf8;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 25px 70px;
+
+            background:
+                radial-gradient(circle at 20% 20%, rgba(14,165,233,.18), transparent 30%),
+                radial-gradient(circle at 80% 70%, rgba(99,102,241,.18), transparent 30%),
+                #0b1120;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 7px 16px;
+            border: 1px solid #38bdf8;
+            border-radius: 30px;
+            color: #38bdf8;
+            margin-bottom: 25px;
+            font-size: 0.9rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            line-height: 1.05;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            color: #38bdf8;
+        }
+
+        .hero p {
+            max-width: 800px;
+            margin: auto;
+            color: #94a3b8;
+            font-size: 1.1rem;
+        }
+
+        .hero-buttons {
+            margin-top: 35px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 13px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: #0284c7;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0369a1;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            border: 1px solid #334155;
+            color: #cbd5e1;
+        }
+
+        .btn-secondary:hover {
+            border-color: #38bdf8;
+            color: #38bdf8;
+        }
+
+        /* =========================
+           GENERAL
+        ========================= */
+
+        section {
+            max-width: 1250px;
+            margin: auto;
+            padding: 90px 25px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+        }
+
+        .section-title p {
+            color: #94a3b8;
+        }
+
+        /* =========================
+           INTRODUCCIÓN
+        ========================= */
+
+        .intro {
+            background: #101827;
+            border-radius: 18px;
+            padding: 35px;
+            border: 1px solid #243044;
+        }
+
+        .intro p {
+            color: #cbd5e1;
+            margin-bottom: 15px;
+        }
+
+        .highlight {
+            color: #38bdf8;
+            font-weight: bold;
+        }
+
+        /* =========================
+           CARDS
+        ========================= */
+
+        .software-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .software-card {
+            background: #111827;
+            border: 1px solid #263449;
+            border-radius: 18px;
+            overflow: hidden;
+            transition: 0.35s;
+        }
+
+        .software-card:hover {
+            transform: translateY(-8px);
+            border-color: #38bdf8;
+            box-shadow: 0 20px 45px rgba(0,0,0,.3);
+        }
+
+        .card-header {
+            padding: 30px;
+            background: linear-gradient(135deg, #172033, #101827);
+        }
+
+        .card-number {
+            color: #38bdf8;
+            font-size: 0.8rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .card-header h3 {
+            font-size: 2rem;
+            margin: 8px 0;
+        }
+
+        .card-header p {
+            color: #94a3b8;
+        }
+
+        .card-body {
+            padding: 30px;
+        }
+
+        .info-box {
+            margin-bottom: 25px;
+        }
+
+        .info-box h4 {
+            color: #38bdf8;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .info-box p {
+            color: #cbd5e1;
+        }
+
+        .info-box ul {
+            padding-left: 20px;
+            color: #cbd5e1;
+        }
+
+        .info-box li {
+            margin-bottom: 6px;
+        }
+
+        .danger {
+            color: #f87171;
+        }
+
+        .success {
+            color: #4ade80;
+        }
+
+        /* =========================
+           TABLA COMPARATIVA
+        ========================= */
+
+        .table-container {
+            overflow-x: auto;
+            border-radius: 15px;
+            border: 1px solid #263449;
+        }
+
+        table {
+            width: 100%;
+            min-width: 900px;
+            border-collapse: collapse;
+            background: #111827;
+        }
+
+        th,
+        td {
+            padding: 18px;
+            text-align: left;
+            border-bottom: 1px solid #263449;
+        }
+
+        th {
+            background: #172033;
+            color: #38bdf8;
+        }
+
+        td {
+            color: #cbd5e1;
+        }
+
+        tr:hover td {
+            background: #151f31;
+        }
+
+        /* =========================
+           FEA
+        ========================= */
+
+        .fea-section {
+            background: #101827;
+            border-radius: 20px;
+            margin: 30px auto;
+        }
+
+        .fea-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .fea-card {
+            padding: 25px;
+            background: #111827;
+            border: 1px solid #263449;
+            border-radius: 14px;
+        }
+
+        .fea-card h3 {
+            color: #38bdf8;
+            margin-bottom: 10px;
+        }
+
+        .fea-card p {
+            color: #94a3b8;
+        }
+
+        /* =========================
+           RECOMENDACIÓN
+        ========================= */
+
+        .recommendations {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .recommendation {
+            background: #111827;
+            border: 1px solid #263449;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .recommendation .icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .recommendation h3 {
+            margin-bottom: 10px;
+            color: #38bdf8;
+        }
+
+        .recommendation p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        /* =========================
+           CONCLUSIÓN
+        ========================= */
+
+        .conclusion {
+            background: linear-gradient(135deg, #10243a, #111827);
+            border: 1px solid #28506d;
+            border-radius: 20px;
+            padding: 45px;
+        }
+
+        .conclusion h2 {
+            color: #38bdf8;
+            margin-bottom: 20px;
+        }
+
+        .conclusion p {
+            color: #cbd5e1;
+            margin-bottom: 15px;
+        }
+
+        .final-message {
+            margin-top: 25px;
+            padding: 20px;
+            border-left: 4px solid #38bdf8;
+            background: rgba(56,189,248,.06);
+            color: white;
+            font-weight: bold;
+        }
+
+        /* =========================
+           FUENTES
+        ========================= */
+
+        .sources {
+            background: #101827;
+            border-radius: 20px;
+            padding: 35px;
+        }
+
+        .sources ul {
+            padding-left: 25px;
+        }
+
+        .sources li {
+            margin-bottom: 10px;
+            color: #cbd5e1;
+        }
+
+        .sources a {
+            color: #38bdf8;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            text-align: center;
+            padding: 35px 20px;
+            background: #070c16;
+            border-top: 1px solid #243044;
+            color: #64748b;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .menu {
+                display: none;
+            }
+
+            .software-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .fea-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .recommendations {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            section {
+                padding: 65px 18px;
+            }
+
+            .hero {
+                padding: 110px 18px 60px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .card-header,
+            .card-body,
+            .intro,
+            .conclusion,
+            .sources {
+                padding: 22px;
+            }
+
+            .recommendations {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <nav>
+        <div class="logo">U3 TTP3</div>
+
+        <ul class="menu">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#introduccion">Introducción</a></li>
+            <li><a href="#software">Software</a></li>
+            <li><a href="#comparativa">Comparativa</a></li>
+            <li><a href="#fea">FEA</a></li>
+            <li><a href="#conclusion">Conclusión</a></li>
+        </ul>
+    </nav>
+</header>
+
+
+<!-- =========================
+     INICIO
+========================= -->
+
+<section class="hero" id="inicio">
+
+    <div class="hero-content">
+
+        <div class="tag">
+            U3 TTP3 · COMPARATIVA VISUAL CREATIVA
+        </div>
+
+        <h1>
+            Software para
+            <span>Ingeniería</span>
+            y Simulación
+        </h1>
+
+        <p>
+            Comparativa entre ALGOR, ANSYS, NISA y AutoCAD,
+            analizando sus características, ventajas, desventajas,
+            costos, requerimientos, aplicaciones e impacto industrial.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="#software" class="btn btn-primary">
+                Explorar comparativa
+            </a>
+
+            <a href="#comparativa" class="btn btn-secondary">
+                Ver tabla
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     INTRODUCCIÓN
+========================= -->
+
+<section id="introduccion">
+
+    <div class="section-title">
+
+        <h2>¿Por qué comparar estos programas?</h2>
+
+        <p>
+            Diferentes herramientas para diferentes necesidades de ingeniería
+        </p>
+
+    </div>
+
+    <div class="intro">
+
+        <p>
+            En la ingeniería moderna, el diseño asistido por computadora
+            y la simulación permiten desarrollar productos y estructuras
+            antes de construirlos físicamente.
+        </p>
+
+        <p>
+            Entre las herramientas que han tenido importancia dentro de este
+            campo se encuentran <span class="highlight">ALGOR, ANSYS, NISA y AutoCAD</span>.
+            Aunque no todos tienen exactamente la misma función, cada uno
+            representa una etapa o enfoque diferente dentro del desarrollo
+            de proyectos de ingeniería.
+        </p>
+
+        <p>
+            Los programas de análisis por elementos finitos, conocidos como
+            <strong>FEA (Finite Element Analysis)</strong>, permiten estudiar
+            cómo se comportaría una pieza, estructura o sistema cuando se
+            encuentra sometido a diferentes condiciones.
+        </p>
+
+        <p>
+            AutoCAD, por otra parte, se encuentra principalmente relacionado
+            con el diseño y la documentación técnica. Por eso, la comparación
+            permite observar que no siempre el programa más potente es el
+            más adecuado: todo depende del objetivo del proyecto.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     SOFTWARE
+========================= -->
+
+<section id="software">
+
+    <div class="section-title">
+
+        <h2>Los cuatro programas</h2>
+
+        <p>
+            Características principales de cada herramienta
+        </p>
+
+    </div>
+
+
+    <div class="software-grid">
+
+
+        <!-- ALGOR -->
+
+        <article class="software-card">
+
+            <div class="card-header">
+
+                <span class="card-number">01 · FEA HISTÓRICO</span>
+
+                <h3>ALGOR</h3>
+
+                <p>
+                    Posteriormente relacionado con Autodesk Simulation Mechanical
+                </p>
+
+            </div>
+
+            <div class="card-body">
+
+                <div class="info-box">
+
+                    <h4>Descripción</h4>
+
+                    <p>
+                        ALGOR fue uno de los programas pioneros del análisis
+                        por elementos finitos para computadoras personales.
+                        Su importancia histórica se debe a que ayudó a hacer
+                        más accesible la simulación para universidades,
+                        ingenieros y empresas que no contaban con grandes
+                        sistemas de cómputo.
+                    </p>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <h4>✓ Puntos fuertes</h4>
+
+                    <ul>
+                        <li>Fue uno de los primeros sistemas FEA para PC.</li>
+                        <li>Integraba diferentes tipos de análisis.</li>
+                        <li>Permitía análisis estructural.</li>
+                        <li>Incluía análisis térmico.</li>
+                        <li>Contaba con capacidades relacionadas con fluidos.</li>
+                        <li>Importación relativamente sencilla desde sistemas CAD.</li>
+                        <li>Incluía análisis no lineal.</li>
+                        <li>Contaba con capacidades de análisis dinámico.</li>
+                        <li>Fue utilizado ampliamente en entornos académicos.</li>
+                    </ul>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <h4>✕ Puntos débiles</h4>
+
+                    <ul>
+                        <li class="danger">
+                            El software original dejó de tener desarrollo activo.
+                        </li>
+
+                        <li class="danger">
+                            No cuenta con el mismo soporte moderno que los
+                            programas actuales.
+                        </li>
+
+                        <li class="danger">
+                            Su interfaz resulta antigua frente a las herramientas
+                            modernas.
+                        </li>
+
+                        <li class="danger">
+                            Las versiones antiguas tienen problemas de
+                            compatibilidad con sistemas actuales.
+                        </li>
+                    </ul>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <h4>💰 Costos</h4>
+
+                    <p>
+                        Las versiones antiguas manejaban modelos de licencia
+                        perpetua. Los precios históricos dependían de la versión,
+                        módulos y modalidad de distribución.
+                    </p>
+
+                    <p>
+                        Actualmente no debe considerarse como una opción moderna
+                        de compra debido a que el producto original fue
+                        descontinuado.
+                    </p>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <h4>💻 Requerimientos</h4>
+
+                    <p>
+                        Las versiones históricas tenían requerimientos
+                        considerablemente menores a los programas modernos.
+                        Computadoras con procesadores convencionales y cantidades
+                        moderadas de RAM podían ejecutar los análisis.
+                    </p>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <h4>🏭 Uso actual</h4>
+
+                    <p>
+                        Su presencia industrial actual es muy limitada.
+                        Principalmente tiene interés académico, histórico
+                        y documental.
+                    </p>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <h4>📈 Impacto industrial</h4>
+
+                    <p>
+                        Su principal aporte fue contribuir a la democratización
+                        del análisis por elementos finitos en computadoras
+                        personales, acercando herramientas de simulación a
+                        usuarios que anteriormente necesitaban sistemas mucho
+                        más costosos.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- ANSYS -->
+
+        <article class="software-card">
+
+            <div class="card-header">
+
+                <span class="card-number">02 · SIMULACIÓN MULTIFÍSICA</span>
+
+                <h3>ANSYS</h3>
+
+                <p>
+                    Una de las plataformas más importantes de simulación CAE
+                </p>
+
+            </div>
+
+            <div class="card-body">
+
+                <div class="info-box">
+
+                    <h4>Descripción</h4>
+
+                    <p>
+                        ANSYS es una plataforma de ingeniería asistida por
+                        computadora utilizada para estudiar el comportamiento
+                        de componentes y sistemas mediante simulación numérica.
+                    </p>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <h4>✓ Puntos fuertes</h4>
+
+                    <ul>
+                        <li>Análisis estructural.</li>
+                        <li>Dinámica y vibraciones.</li>
+                        <li>Análisis térmico.</li>
+                        <li>CFD mediante ANSYS Fluent.</li>
+                        <li>Electromagnetismo.</li>
+                        <li>Análisis de fatiga.</li>
+                        <li>Simulación multifísica.</li>
+                        <li>Amplia variedad de materiales.</li>
+                        <li>Herramientas avanzadas de mallado.</li>
+                        <li>Integración con diferentes sistemas CAD.</li>
+                        <li>Posibilidad de utilizar computación de alto rendimiento.</li>
+                    </ul>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <h4>✕ Puntos débiles</h4>
+
+                    <ul>
+                        <li class="danger">
+                            Puede representar una inversión considerable.
+                        </li>
+
+                        <li class="danger">
+                            Su aprendizaje puede ser complejo.
+                        </li>
+
+                        <li class="danger">
+                            Los resultados dependen de una correcta configuración
+                            del modelo.
+                        </li>
+
+                        <li class="danger">
+                            Los análisis avanzados pueden requerir hardware
+                            considerablemente potente.
+                        </li>
+                    </ul>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <h4>💰 Costos</h4>
+
+                    <p>
+                        El costo depende de los productos, módulos, tipo de
+                        licencia y acuerdo comercial. Las soluciones profesionales
+                        pueden representar varios miles de dólares y los
+                        paquetes especializados pueden aumentar considerablemente
+                        el costo.
+                    </p>
+
+                    <p>
+                        También existen modalidades educativas y versiones
+                        destinadas a estudiantes con diferentes restricciones.
+                    </p>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <h4>💻 Requerimientos</h4>
+
+                    <ul>
+                        <li>Windows de 64 bits y algunas plataformas Linux.</li>
+                        <li>Procesador multinúcleo.</li>
+                        <li>RAM suficiente para el tamaño del modelo.</li>
+                        <li>Almacenamiento SSD recomendado.</li>
+                        <li>GPU compatible para determinadas aplicaciones.</li>
+                        <li>Para modelos grandes puede ser necesaria una workstation.</li>
+                    </ul>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <h4>🏭 Uso actual</h4>
+
+                    <p>
+                        Se utiliza en diferentes sectores de ingeniería,
+                        incluyendo:
+                    </p>
+
+                    <ul>
+                        <li>Industria automotriz.</li>
+                        <li>Aeroespacial.</li>
+                        <li>Energía.</li>
+                        <li>Electrónica.</li>
+                        <li>Manufactura.</li>
+                        <li>Ingeniería civil.</li>
+                        <li>Industria médica y biomédica.</li>
+                    </ul>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <h4>📈 Impacto industrial</h4>
+
+                    <p>
+                        Las herramientas de simulación permiten detectar
+                        problemas de diseño antes de fabricar físicamente
+                        un componente. Esto puede reducir iteraciones,
+                        costos de prototipos y tiempos de desarrollo.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- NISA -->
+
+        <article class="software-card">
+
+            <div class="card-header">
+
+                <span class="card-number">03 · ANÁLISIS ESTRUCTURAL</span>
+
+                <h3>NISA</h3>
+
+                <p>
+                    Numerically Integrated Software Analysis
+                </p>
+
+            </div>
+
+            <div class="card-body">
+
+                <div class="info-box">
+
+                    <h4>Descripción</h4>
+
+                    <p>
+                        NISA es un software de análisis numérico orientado
+                        principalmente a problemas de ingeniería estructural
+                        y otros análisis mediante elementos finitos.
+                    </p>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <h4>✓ Puntos fuertes</h4>
+
+                    <ul>
+                        <li>Enfoque en análisis estructural.</li>
+                        <li>Aplicaciones en estructuras civiles.</li>
+                        <li>Análisis estático.</li>
+                        <li>Análisis dinámico.</li>
+                        <li>Aplicaciones en estructuras metálicas.</li>
+                        <li>Puede ser menos complejo que plataformas multifísicas.</li>
+                        <li>Requerimientos de hardware relativamente moderados.</li>
+                    </ul>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <h4>✕ Puntos débiles</h4>
+
+                    <ul>
+                        <li class="danger">
+                            Comunidad considerablemente menor que ANSYS.
+                        </li>
+
+                        <li class="danger">
+                            Menor cantidad de tutoriales y material educativo
+                            disponible actualmente.
+                        </li>
+
+                        <li class="danger">
+                            Interfaz menos moderna frente a plataformas actuales.
+                        </li>
+
+                        <li class="danger">
+                            Desarrollo y soporte dependen de la versión
+                            y disponibilidad del producto.
+                        </li>
+                    </ul>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <h4>💰 Costos</h4>
+
+                    <p>
+                        Las versiones históricas se comercializaron mediante
+                        diferentes modalidades de licencia. Su costo tradicional
+                        fue inferior al de algunas plataformas profesionales
+                        de simulación multifísica.
+                    </p>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <h4>💻 Requerimientos</h4>
+
+                    <p>
+                        Para modelos de tamaño moderado puede funcionar en
+                        computadoras convencionales con Windows y cantidades
+                        medias de memoria RAM. Los requerimientos reales
+                        dependen del tamaño del modelo y del análisis.
+                    </p>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <h4>🏭 Uso</h4>
+
+                    <ul>
+                        <li>Ingeniería civil.</li>
+                        <li>Puentes.</li>
+                        <li>Edificios.</li>
+                        <li>Estructuras metálicas.</li>
+                        <li>Investigación académica.</li>
+                        <li>Proyectos de análisis estructural.</li>
+                    </ul>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <h4>📈 Impacto industrial</h4>
+
+                    <p>
+                        Su importancia se encuentra principalmente en el
+                        área de análisis estructural. Aunque no alcanzó la
+                        presencia global de ANSYS, representa una alternativa
+                        histórica para determinados problemas de ingeniería.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- AUTOCAD -->
+
+        <article class="software-card">
+
+            <div class="card-header">
+
+                <span class="card-number">04 · CAD</span>
+
+                <h3>AutoCAD</h3>
+
+                <p>
+                    Diseño asistido por computadora y documentación técnica
+                </p>
+
+            </div>
+
+            <div class="card-body">
+
+                <div class="info-box">
+
+                    <h4>Descripción</h4>
+
+                    <p>
+                        AutoCAD es una de las herramientas CAD más conocidas
+                        para dibujo técnico, diseño 2D, modelado 3D y
+                        documentación de proyectos.
+                    </p>
+
+                    <p>
+                        A diferencia de ANSYS, su función principal no es
+                        realizar análisis FEA avanzado.
+                    </p>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <h4>✓ Puntos fuertes</h4>
+
+                    <ul>
+                        <li>Amplio uso profesional.</li>
+                        <li>Excelente para dibujo 2D.</li>
+                        <li>Soporte de DWG y DXF.</li>
+                        <li>Herramientas de acotación.</li>
+                        <li>Bloques reutilizables.</li>
+                        <li>Referencias externas.</li>
+                        <li>Documentación técnica.</li>
+                        <li>Modelado 3D básico y avanzado según el proyecto.</li>
+                        <li>Amplia compatibilidad con otros flujos CAD.</li>
+                    </ul>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <h4>✕ Puntos débiles</h4>
+
+                    <ul>
+                        <li class="danger">
+                            No es un programa FEA especializado.
+                        </li>
+
+                        <li class="danger">
+                            Para simulaciones avanzadas se necesita otra
+                            herramienta.
+                        </li>
+
+                        <li class="danger">
+                            Puede resultar menos conveniente para determinados
+                            proyectos de modelado paramétrico que otras
+                            plataformas.
+                        </li>
+
+                        <li class="danger">
+                            El modelo comercial actual se basa principalmente
+                            en suscripciones.
+                        </li>
+                    </ul>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <h4>💰 Costos</h4>
+
+                    <p>
+                        El precio depende del plan, región, duración de la
+                        suscripción y modalidad contratada. Autodesk actualiza
+                        sus precios periódicamente, por lo que los valores
+                        históricos no deben tomarse como precios actuales.
+                    </p>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <h4>💻 Requerimientos</h4>
+
+                    <ul>
+                        <li>Windows o macOS dependiendo de la versión.</li>
+                        <li>Procesador moderno.</li>
+                        <li>Memoria RAM suficiente para el proyecto.</li>
+                        <li>GPU compatible para trabajo 3D.</li>
+                        <li>Espacio disponible para instalación y archivos.</li>
+                    </ul>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <h4>🏭 Uso actual</h4>
+
+                    <ul>
+                        <li>Arquitectura.</li>
+                        <li>Ingeniería civil.</li>
+                        <li>Ingeniería mecánica.</li>
+                        <li>Planos industriales.</li>
+                        <li>Instalaciones.</li>
+                        <li>Diseño técnico.</li>
+                        <li>Documentación de proyectos.</li>
+                    </ul>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <h4>📈 Impacto industrial</h4>
+
+                    <p>
+                        AutoCAD ayudó a establecer herramientas digitales
+                        para la creación y documentación de planos técnicos.
+                        Su ecosistema DWG se convirtió en una referencia
+                        importante dentro de los flujos de trabajo CAD.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     TABLA
+========================= -->
+
+<section id="comparativa">
+
+    <div class="section-title">
+
+        <h2>Comparativa general</h2>
+
+        <p>
+            Diferencias principales entre las cuatro herramientas
+        </p>
+
+    </div>
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Característica</th>
+                    <th>ALGOR</th>
+                    <th>ANSYS</th>
+                    <th>NISA</th>
+                    <th>AutoCAD</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>Tipo</td>
+                    <td>FEA / CAE histórico</td>
+                    <td>CAE / FEA multifísico</td>
+                    <td>FEA estructural</td>
+                    <td>CAD</td>
+                </tr>
+
+                <tr>
+                    <td>Objetivo principal</td>
+                    <td>Simulación</td>
+                    <td>Simulación avanzada</td>
+                    <td>Análisis estructural</td>
+                    <td>Diseño y documentación</td>
+                </tr>
+
+                <tr>
+                    <td>Análisis estructural</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                    <td>Limitado / indirecto</td>
+                </tr>
+
+                <tr>
+                    <td>Análisis térmico</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                    <td>Disponible según módulo</td>
+                    <td>✕</td>
+                </tr>
+
+                <tr>
+                    <td>CFD</td>
+                    <td>Histórico</td>
+                    <td>✓</td>
+                    <td>Limitado</td>
+                    <td>✕</td>
+                </tr>
+
+                <tr>
+                    <td>Electromagnetismo</td>
+                    <td>Limitado</td>
+                    <td>✓</td>
+                    <td>Limitado</td>
+                    <td>✕</td>
+                </tr>
+
+                <tr>
+                    <td>Diseño CAD</td>
+                    <td>Importación CAD</td>
+                    <td>Integración CAD</td>
+                    <td>Limitado</td>
+                    <td>✓</td>
+                </tr>
+
+                <tr>
+                    <td>Uso actual</td>
+                    <td>Bajo / histórico</td>
+                    <td>Muy alto</td>
+                    <td>Nicho</td>
+                    <td>Muy alto</td>
+                </tr>
+
+                <tr>
+                    <td>Complejidad</td>
+                    <td>Media</td>
+                    <td>Alta</td>
+                    <td>Media</td>
+                    <td>Media</td>
+                </tr>
+
+                <tr>
+                    <td>Hardware</td>
+                    <td>Bajo</td>
+                    <td>Medio / alto</td>
+                    <td>Medio</td>
+                    <td>Medio</td>
+                </tr>
+
+                <tr>
+                    <td>Presencia industrial</td>
+                    <td>Baja actualmente</td>
+                    <td>Muy alta</td>
+                    <td>Especializada</td>
+                    <td>Muy alta</td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FEA
+========================= -->
+
+<section id="fea" class="fea-section">
+
+    <div class="section-title">
+
+        <h2>¿Qué es FEA?</h2>
+
+        <p>
+            Finite Element Analysis · Análisis por Elementos Finitos
+        </p>
+
+    </div>
+
+
+    <div class="fea-grid">
+
+        <div class="fea-card">
+
+            <h3>01 · Geometría</h3>
+
+            <p>
+                Primero se define la geometría de la pieza, estructura
+                o componente que se desea analizar.
+            </p>
+
+        </div>
+
+
+        <div class="fea-card">
+
+            <h3>02 · Mallado</h3>
+
+            <p>
+                El modelo se divide en pequeños elementos conectados
+                entre sí mediante nodos.
+            </p>
+
+        </div>
+
+
+        <div class="fea-card">
+
+            <h3>03 · Material</h3>
+
+            <p>
+                Se asignan propiedades como módulo de elasticidad,
+                densidad, conductividad térmica o resistencia.
+            </p>
+
+        </div>
+
+
+        <div class="fea-card">
+
+            <h3>04 · Condiciones</h3>
+
+            <p>
+                Se establecen cargas, restricciones, temperaturas,
+                presiones y demás condiciones necesarias.
+            </p>
+
+        </div>
+
+
+        <div class="fea-card">
+
+            <h3>05 · Solución</h3>
+
+            <p>
+                El programa utiliza métodos numéricos para resolver
+                el comportamiento del modelo bajo las condiciones
+                establecidas.
+            </p>
+
+        </div>
+
+
+        <div class="fea-card">
+
+            <h3>06 · Resultados</h3>
+
+            <p>
+                Finalmente se analizan desplazamientos, esfuerzos,
+                deformaciones, temperaturas, factores de seguridad
+                y otras variables.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     RECOMENDACIONES
+========================= -->
+
+<section>
+
+    <div class="section-title">
+
+        <h2>¿Cuál elegir?</h2>
+
+        <p>
+            La mejor herramienta depende del objetivo del proyecto
+        </p>
+
+    </div>
+
+
+    <div class="recommendations">
+
+        <div class="recommendation">
+
+            <div class="icon">📐</div>
+
+            <h3>AutoCAD</h3>
+
+            <p>
+                Ideal para dibujo técnico, planos, documentación
+                y diseño CAD.
+            </p>
+
+        </div>
+
+
+        <div class="recommendation">
+
+            <div class="icon">🧮</div>
+
+            <h3>ANSYS</h3>
+
+            <p>
+                Recomendado para simulación avanzada y problemas
+                multifísicos.
+            </p>
+
+        </div>
+
+
+        <div class="recommendation">
+
+            <div class="icon">🏗️</div>
+
+            <h3>NISA</h3>
+
+            <p>
+                Enfocado principalmente en determinados problemas
+                de análisis estructural.
+            </p>
+
+        </div>
+
+
+        <div class="recommendation">
+
+            <div class="icon">🕰️</div>
+
+            <h3>ALGOR</h3>
+
+            <p>
+                Principalmente importante como referencia histórica
+                del desarrollo del FEA para PC.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     IMPACTO
+========================= -->
+
+<section>
+
+    <div class="section-title">
+
+        <h2>Impacto en la ingeniería</h2>
+
+        <p>
+            De los planos digitales a la simulación virtual
+        </p>
+
+    </div>
+
+
+    <div class="intro">
+
+        <p>
+            El desarrollo de estas herramientas ha cambiado la manera
+            en que los ingenieros diseñan, prueban y modifican productos.
+        </p>
+
+        <p>
+            Antes de la utilización generalizada de la simulación
+            computacional, muchas decisiones de diseño dependían de
+            cálculos manuales y prototipos físicos.
+        </p>
+
+        <p>
+            Actualmente, un ingeniero puede crear un modelo digital,
+            analizar diferentes condiciones y encontrar posibles problemas
+            antes de fabricar la pieza definitiva.
+        </p>
+
+        <p>
+            Esto es especialmente importante en sectores como el
+            <strong>automotriz, aeroespacial, energético, civil y manufacturero</strong>,
+            donde un error de diseño puede representar costos elevados.
+        </p>
+
+        <p>
+            Sin embargo, la simulación no elimina la necesidad de conocimientos
+            de ingeniería. Un resultado generado por computadora solamente
+            es confiable cuando el modelo, las propiedades del material,
+            las condiciones de frontera, el mallado y las cargas representan
+            correctamente el problema real.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CONCLUSIÓN
+========================= -->
+
+<section id="conclusion">
+
+    <div class="conclusion">
+
+        <h2>Conclusión</h2>
+
+        <p>
+            La comparación entre ALGOR, ANSYS, NISA y AutoCAD permite
+            observar que cada programa surgió para cubrir necesidades
+            diferentes dentro de la ingeniería.
+        </p>
+
+        <p>
+            <strong>ALGOR</strong> representa una etapa importante en la
+            historia del análisis por elementos finitos para computadoras
+            personales. Aunque actualmente tiene poca presencia, contribuyó
+            a que la simulación fuera más accesible.
+        </p>
+
+        <p>
+            <strong>ANSYS</strong> representa una de las soluciones más
+            completas para simulación de ingeniería, especialmente cuando
+            se necesitan análisis estructurales, térmicos, fluidos o
+            multifísicos.
+        </p>
+
+        <p>
+            <strong>NISA</strong> tiene una orientación más especializada,
+            particularmente en el análisis estructural y determinados
+            problemas de ingeniería civil.
+        </p>
+
+        <p>
+            Finalmente, <strong>AutoCAD</strong> tiene una función diferente:
+            su principal objetivo es el diseño y la documentación técnica,
+            por lo que no debe considerarse directamente como un sustituto
+            de un programa FEA.
+        </p>
+
+
+        <div class="final-message">
+
+            Para dibujar y documentar:
+            <strong>AutoCAD.</strong>
+            <br><br>
+
+            Para simulación avanzada:
+            <strong>ANSYS.</strong>
+            <br><br>
+
+            Para determinados análisis estructurales:
+            <strong>NISA.</strong>
+            <br><br>
+
+            Para conocer la evolución histórica del FEA en PC:
+            <strong>ALGOR.</strong>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FUENTES
+========================= -->
+
+<section>
+
+    <div class="section-title">
+
+        <h2>Fuentes de consulta</h2>
+
+        <p>
+            Referencias utilizadas para complementar la investigación
+        </p>
+
+    </div>
+
+
+    <div class="sources">
+
+        <ul>
+
+            <li>
+                Autodesk — Información y documentación oficial de productos
+                y soporte.
+            </li>
+
+            <li>
+                ANSYS — Información oficial sobre simulación, productos
+                y soluciones de ingeniería.
+            </li>
+
+            <li>
+                Autodesk Support Lifecycle — Información relacionada con
+                ciclos de vida y soporte de productos.
+            </li>
+
+            <li>
+                G2 — Opiniones y comparativas de software de ingeniería.
+            </li>
+
+            <li>
+                3DCADPortal — Información relacionada con herramientas
+                CAD y CAE.
+            </li>
+
+            <li>
+                UDLAP — Material académico relacionado con ALGOR y análisis
+                por elementos finitos.
+            </li>
+
+        </ul>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <p>
+        U3 TTP3 · Comparativa Visual Creativa
+    </p>
+
+    <p>
+        Software CAD, CAE y FEA aplicado a la ingeniería
+    </p>
+
+</footer>
+
+
+<script>
+
+    // ==========================================
+    // Animación sencilla al entrar a la página
+    // ==========================================
+
+    const cards = document.querySelectorAll(
+        ".software-card, .fea-card, .recommendation"
+    );
+
+    const observer = new IntersectionObserver(
+        entries => {
+
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+
+                }
+
+            });
+
+        },
+        {
+            threshold: 0.1
+        }
+    );
+
+
+    cards.forEach(card => {
+
+        card.style.opacity = "0";
+        card.style.transform = "translateY(30px)";
+        card.style.transition = "opacity .6s ease, transform .6s ease";
+
+        observer.observe(card);
+
+    });
+
+</script>
+
+</body>
+</html>
+```
